@@ -7,20 +7,21 @@ import RPi.GPIO as GPIO
 
 
 app = Flask(__name__)
-toggle = False
+state = False
 
 
 @app.route('/api/toggle', methods=['GET'])
 def toggle_switch():
-    if toggle:
+    global state
+    if state:
         GPIO.output(app.config['SWITCH_PIN'], GPIO.HIGH)
         print('[Output] : HIGH')
     else:
         GPIO.output(app.config['SWITCH_PIN'], GPIO.LOW)
         print('[Output] : LOW')
-    toggle = not toggle
+    state = not state
 
-    return jsonify(state=toggle)
+    return jsonify(state=state)
 
 
 if __name__ == "__main__":
