@@ -1,0 +1,2 @@
+DEBUG = False
+SWITCH_PIN = 18
